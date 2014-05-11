@@ -24,6 +24,7 @@ namespace CacheSample.DAL.Cache
                     o=HttpContext.Current.Cache[MyCacheEntries.Customers];
                 }
 
+
                 return (CustomersCollection)o;
             }
         }
