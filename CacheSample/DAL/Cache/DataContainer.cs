@@ -25,6 +25,7 @@ namespace CacheSample.DAL.Cache
                 }
 
 
+
                 return (CustomersCollection)o;
             }
         }
