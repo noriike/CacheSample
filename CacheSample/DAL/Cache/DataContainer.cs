@@ -10,30 +10,37 @@ namespace CacheSample.DAL.Cache
     {
         private static class MyCacheEntries
         {
-            public const string Customers = "Customers";
+            public const string Purchasers = "Purchasers";
         }
 
-        public CustomersCollection Customers
+        /// <summary>
+        /// Purchasersの取得
+        /// 日付単位でキャッシュ
+        /// </summary>
+        public static PurchaserCollection GetPurchasers(String filename)
         {
-            get
+            object o = HttpContext.Current.Cache[filename];
+            
+            if(o==null)
             {
-                object o = HttpContext.Current.Cache[MyCacheEntries.Customers];
-                if (o == null)
-                {
-                    LoadCustomers();
-                    o=HttpContext.Current.Cache[MyCacheEntries.Customers];
-                }
-
-
-
-                return (CustomersCollection)o;
+                 LoadPurchasers(filename);
+                 o=HttpContext.Current.Cache[filename];
             }
+
+            return (PurchaserCollection)o;
         }
 
-        public CustomersCollection LoadCustomers()
+        /// <summary>
+        /// 日付指定したPurchasersをキャッシュにロード
+        /// </summary>
+        /// <returns></returns>
+        private static void LoadPurchasers(String filename)
         {
-
-            return new CustomersCollection();
+            var pc=PurchaserCollection.Load(filename);
+            
+            //cachedependencyを使って、ファイル更新日時を見て、
+            //キャッシュが破棄されるようにするにはどうしたらいいか？
+            HttpContext.Current.Cache.Insert(filename,pc,
         }
     }
 }
