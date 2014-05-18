@@ -63,7 +63,7 @@
   <ItemGroup>
     <Compile Include="DAL\Cache\DataContainer.cs" />
     <Compile Include="DAL\Model\Customer.cs" />
-    <Compile Include="DAL\Model\CustomersCollection.cs" />
+    <Compile Include="DAL\Model\PurchaserCollection.cs" />
     <Compile Include="DAL\Model\Purchaser.cs" />
     <Compile Include="DAL\Model\SalesItem.cs" />
     <Compile Include="Pages\CustomerView.aspx.cs">
@@ -101,7 +101,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>50731</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:53882/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

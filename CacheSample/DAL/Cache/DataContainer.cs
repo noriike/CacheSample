@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CacheSample.DAL.Model;
-
+using System.Web.Caching;
 namespace CacheSample.DAL.Cache
 {
     public static class DataContainer
@@ -38,9 +38,11 @@ namespace CacheSample.DAL.Cache
         {
             var pc=PurchaserCollection.Load(filename);
             
-            //cachedependencyを使って、ファイル更新日時を見て、
-            //キャッシュが破棄されるようにするにはどうしたらいいか？
-            HttpContext.Current.Cache.Insert(filename,pc,
+            //キャッシュを一時間で破棄
+            HttpContext.Current.Cache.Insert(filename, pc, new CacheDependency(filename),
+                                                System.Web.Caching.Cache.NoAbsoluteExpiration, 
+                                                    TimeSpan.FromHours(1));
+
         }
     }
 }
