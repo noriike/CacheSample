@@ -38,10 +38,12 @@ namespace CacheSample.DAL.Cache
         {
             var pc=PurchaserCollection.Load(filename);
             
-            //キャッシュを一時間で破棄
+            //キャッシュを一時間で破棄 Cacheオブジェクトの優先度は低
+            //(サーバがシステムメモリを解放するときに最初に削除される
             HttpContext.Current.Cache.Insert(filename, pc, new CacheDependency(filename),
                                                 System.Web.Caching.Cache.NoAbsoluteExpiration, 
-                                                    TimeSpan.FromHours(1));
+                                                    TimeSpan.FromHours(1)
+                                                    ,CacheItemPriority.Low,null);
 
         }
     }
